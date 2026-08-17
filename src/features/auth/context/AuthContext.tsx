@@ -5,8 +5,8 @@ import {
   useState,
 } from "react";
 
-import type { CurrentUser } from "../types/auth.types";
-import { login as loginApi } from "../api/authApi";
+import type { CurrentUser, RegisterRequest } from "../types/auth.types";
+import { login as loginApi, register as registerApi } from "../api/authApi";
 import { tokenStorage } from "../../../utils/token";
 import {
   getUserFromToken,
@@ -20,6 +20,7 @@ interface AuthContextValue {
   login: (username: string, password: string) => Promise<void>;
   logout: () => void;
   hasRole: (role: string) => boolean;
+  register: (request: RegisterRequest) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextValue | undefined>(
@@ -71,6 +72,10 @@ export const AuthProvider = ({
     setUser(null);
   };
 
+  const register = async (request: RegisterRequest): Promise<void> => {
+    await registerApi(request);
+  };
+
   const hasRole = (role: string): boolean => {
     return user?.roles.includes(role) ?? false;
   };
@@ -84,6 +89,7 @@ export const AuthProvider = ({
         login,
         logout,
         hasRole,
+        register
       }}
     >
       {children}

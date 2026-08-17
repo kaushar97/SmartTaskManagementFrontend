@@ -12,43 +12,32 @@ import TasksPage from "../features/tasks/pages/TasksPage";
 import ProtectedRoute from "./ProtectedRoute";
 import RoleRoute from "./RoleRoute";
 import AdminPage from "../features/users/AdminPage";
+import AppLayout from "../layouts/AppLayout";
 
 const AppRoutes = () => {
   return (
     <BrowserRouter>
-      <Routes>
+  <Routes>
 
-        {/* Public Routes */}
+    {/* Public */}
 
-        <Route
-          path="/login"
-          element={<LoginPage />}
-        />
+    <Route path="/login" element={<LoginPage />} />
+    <Route path="/register" element={<RegisterPage />} />
 
-        <Route
-          path="/register"
-          element={<RegisterPage />}
-        />
+    {/* Protected */}
 
-        {/* Protected Routes */}
+    <Route
+      element={
+        <ProtectedRoute>
+          <AppLayout />
+        </ProtectedRoute>
+      }
+    >
+      <Route path="/dashboard" element={<DashboardPage />} />
 
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute>
-              <DashboardPage />
-            </ProtectedRoute>
-          }
-        />
+      <Route path="/tasks" element={<TasksPage />} />
+    </Route>
 
-        <Route
-          path="/tasks"
-          element={
-            <ProtectedRoute>
-              <TasksPage />
-            </ProtectedRoute>
-          }
-        />
 
         <Route
   path="/admin"
