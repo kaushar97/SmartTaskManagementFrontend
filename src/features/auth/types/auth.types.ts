@@ -12,7 +12,7 @@ export interface RegisterRequest {
   lastName?: string;
   username: string;
   password: string;
-  roles: string[];
+  roles?: string[];
 }
 
 export interface CurrentUser {
@@ -20,4 +20,12 @@ export interface CurrentUser {
   email: string;
   username: string;
   roles: string[];
+}
+
+export interface RegisterFormData {
+    firstName: string;
+    lastName?: string;
+    username: string;
+    password: string;
+    confirmPassword: string;
 }

@@ -18,11 +18,11 @@ export const login = async (
 
 export const register = async (
   request: RegisterRequest
-): Promise<boolean> => {
+): Promise<void> => {
   const response = await apiClient.post<boolean>(
     "/auth/register",
     request
   );
 
-  return response.data;
+  //return response.data;
 };

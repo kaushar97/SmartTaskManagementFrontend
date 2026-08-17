@@ -12,7 +12,7 @@ const AuthTest = () => {
 
   const handleLogin = async () => {
     try {
-      await login("reader@smtmanagement.com", "reader@123");
+      await login("email", "password");
     } catch (error) {
       console.error("Login failed:", error);
     }
