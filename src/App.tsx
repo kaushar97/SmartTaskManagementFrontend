@@ -1,11 +1,11 @@
-import AuthTest from "./features/auth/components/AuthTest";
+//import AuthTest from "./features/auth/components/AuthTest";
 import AppRoutes from "./routes/AppRoutes";
 
 function App() {
   return (
   <>
   <AppRoutes />
-  <AuthTest />
+  {/* <AuthTest /> */}
   </>
   );
 }
