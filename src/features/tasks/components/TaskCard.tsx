@@ -1,3 +1,4 @@
+import { priorityColors, statusColors } from "../constants/taskColors";
 import type { Task } from "../models/task";
 
 interface TaskCardProps {
@@ -25,58 +26,83 @@ export default function TaskCard({
           }).format(new Date(task.dueDate))
         : "No due date";
 
-    return (
-        <div className="border rounded-lg p-4 shadow-sm bg-white">
-            <h2 className="text-xl font-semibold mb-2">
-                {task.title}
-            </h2>
+    const canManage = canEdit && canDelete;
 
-            <p className="text-gray-700 mb-4">
-                {task.description || "No description"}
+    return (
+        <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition hover:shadow-lg">
+             <div className="flex items-start justify-between">
+
+                <h2 className="text-xl font-semibold text-slate-900">
+                    {task.title}
+                </h2>
+
+            </div>
+
+            <p className="mt-3 text-sm leading-6 text-slate-600">
+                {task.description || "No description provided."}
             </p>
 
-            <div className="space-y-2 text-sm">
+            <div className="mt-5 flex flex-wrap gap-2">
+
+                <span
+                    className={`rounded-full px-3 py-1 text-xs font-semibold ${priorityColors[task.priority]}`}
+                >
+                    {task.priority}
+                </span>
+
+                <span
+                    className={`rounded-full px-3 py-1 text-xs font-semibold ${statusColors[task.status]}`}
+                >
+                    {task.status}
+                </span>
+
+            </div>
+<div className="mt-5 space-y-2 text-sm text-slate-600">
+
                 <p>
-                    <strong>Priority:</strong> {task.priority}
+
+                    <span className="font-medium">
+                        Assigned:
+                    </span>{" "}
+                    {task.assignedToName}
+
                 </p>
 
                 <p>
-                    <strong>Status:</strong> {task.status}
+
+                    <span className="font-medium">
+                        Due:
+                    </span>{" "}
+                    {new Date(task.dueDate).toLocaleDateString()}
+
                 </p>
 
-                <p>
-                    <strong>Due Date:</strong> {formattedDueDate}
-                </p>
-
-                <p>
-                    <strong>Assigned User:</strong>{" "}
-                    {task.assignedToName ?? "Unassigned"}
-                </p>
             </div>
 
-            <div className="flex gap-2 mt-6">
-                {canEdit && (
+           {canManage && (
+
+                <div className="mt-6 flex justify-end gap-3">
+
                     <button
-                        type="button"
                         onClick={() => onEdit(task.publicId)}
-                        className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 transition"
-                        disabled={isDeleting}
+                        className="rounded-lg border border-blue-600 px-4 py-2 text-sm font-medium text-blue-600 hover:bg-blue-50"
                     >
-                    Edit
-                </button>
-                )}
-
-                {canDelete && (
-                    <button
-                        type="button"
-                        onClick={() => onDelete(task.publicId)}
-                        className="px-4 py-2 rounded bg-red-600 text-white hover:bg-red-700 transition"
-                        disabled={isDeleting}
-                    >
-                        {isDeleting ? "Deleting..." : "Delete"}
+                        Edit
                     </button>
-                )}
-            </div>
+
+                    <button
+                        disabled={isDeleting}
+                        onClick={() => onDelete(task.publicId)}
+                        className="rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 disabled:opacity-60"
+                    >
+                        {isDeleting
+                            ? "Deleting..."
+                            : "Delete"}
+                    </button>
+
+                </div>
+
+            )}
         </div>
     );
 }
