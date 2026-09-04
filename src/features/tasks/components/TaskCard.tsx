@@ -18,15 +18,6 @@ export default function TaskCard({
     canDelete,
     isDeleting = false,
 }: TaskCardProps) {
-    const formattedDueDate = task.dueDate
-        ? new Intl.DateTimeFormat("en-GB", {
-              day: "2-digit",
-              month: "short",
-              year: "numeric",
-          }).format(new Date(task.dueDate))
-        : "No due date";
-
-    const canManage = canEdit && canDelete;
 
     return (
         <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition hover:shadow-lg">
@@ -79,26 +70,34 @@ export default function TaskCard({
 
             </div>
 
-           {canManage && (
+           {(canEdit || canDelete) && (
 
-                <div className="mt-6 flex justify-end gap-3">
+                <div className="mt-6 flex justify-end gap-3 border-t border-slate-200 pt-5">
 
-                    <button
-                        onClick={() => onEdit(task.publicId)}
-                        className="rounded-lg border border-blue-600 px-4 py-2 text-sm font-medium text-blue-600 hover:bg-blue-50"
-                    >
-                        Edit
-                    </button>
+                    {canEdit && (
 
-                    <button
-                        disabled={isDeleting}
-                        onClick={() => onDelete(task.publicId)}
-                        className="rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 disabled:opacity-60"
-                    >
-                        {isDeleting
-                            ? "Deleting..."
-                            : "Delete"}
-                    </button>
+                        <button
+                            onClick={() => onEdit(task.publicId)}
+                            className="rounded-lg border border-blue-600 px-4 py-2 text-sm font-medium text-blue-600 transition hover:bg-blue-50"
+                        >
+                            Edit
+                        </button>
+
+                    )}
+
+                    {canDelete && (
+
+                        <button
+                            onClick={() => onDelete(task.publicId)}
+                            disabled={isDeleting}
+                            className="rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-60"
+                        >
+                            {isDeleting
+                                ? "Deleting..."
+                                : "Delete"}
+                        </button>
+
+                    )}
 
                 </div>
 
