@@ -4,27 +4,17 @@ import Sidebar from "./Sidebar";
 
 const AppLayout = () => {
   return (
-    <>
+    <div className="min-h-screen bg-slate-100">
       <Navbar />
 
-      <div
-        style={{
-          display: "flex",
-          minHeight: "calc(100vh - 64px)",
-        }}
-      >
+      <div className="flex">
         <Sidebar />
 
-        <main
-          style={{
-            flex: 1,
-            padding: "2rem",
-          }}
-        >
+        <main className="min-w-0 flex-1">
           <Outlet />
         </main>
       </div>
-    </>
+    </div>
   );
 };
 
