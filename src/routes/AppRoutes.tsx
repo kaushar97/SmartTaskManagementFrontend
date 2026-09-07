@@ -50,7 +50,7 @@ const AppRoutes = () => {
 
         <Route path="/tasks/create"
           element={
-            <RoleRoute allowedRoles={["Writer"]}>
+            <RoleRoute allowedRoles={["Writer", "Reader"]}>
               <CreateTaskPage />
             </RoleRoute>
           }
