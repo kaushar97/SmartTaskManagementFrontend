@@ -10,11 +10,11 @@ import DashboardPage from "../features/dashboard/pages/DashboardPage";
 import TasksPage from "../features/tasks/pages/TasksPage";
 import ProtectedRoute from "./ProtectedRoute";
 import RoleRoute from "./RoleRoute";
-import AdminPage from "../features/users/AdminPage";
 import AppLayout from "../layouts/AppLayout";
 import CreateTaskPage from "../features/tasks/pages/CreateTaskPage";
 import EditTaskPage from "../features/tasks/pages/EditTaskPage";
 import MyTasksPage from "../features/tasks/pages/MyTasksPage";
+import UserManagementPage from "../features/users/pages/UserManagementPage";
 
 const AppRoutes = () => {
   return (
@@ -40,10 +40,10 @@ const AppRoutes = () => {
           <Route path="/my-tasks" element={<MyTasksPage />} />
         </Route>
 
-        <Route path="/admin"
+        <Route path="/userManagement"
           element={
             <RoleRoute allowedRoles={["Writer"]}>
-              <AdminPage />
+              <UserManagementPage />
             </RoleRoute>
           }
         />
