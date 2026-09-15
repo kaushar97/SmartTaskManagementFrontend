@@ -19,10 +19,8 @@ export const login = async (
 export const register = async (
   request: RegisterRequest
 ): Promise<void> => {
-  const response = await apiClient.post<boolean>(
+  await apiClient.post<boolean>(
     "/auth/register",
     request
   );
-
-  //return response.data;
 };

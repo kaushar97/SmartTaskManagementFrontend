@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useTasks } from "../../tasks/hooks/useTasks";
+import RoleInfoBanner from "../../../components/ui/RoleInfoBanner";
 
 const DashboardPage = () => {
   const {
@@ -120,6 +121,7 @@ const DashboardPage = () => {
       )}
 
       {/* Dashboard Content */}
+      <RoleInfoBanner />
 
       {!isLoading && !error && (
         <>
