@@ -49,11 +49,11 @@ const Sidebar = () => {
 
           {isWriter && (
             <NavLink
-              to="/admin"
+              to="/userManagement"
               className={getNavLinkClass}
             >
               <span className="mr-3">⚙</span>
-              Admin
+              User Management
             </NavLink>
           )}
 
